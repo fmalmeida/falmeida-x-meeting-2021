@@ -1,0 +1,16 @@
+.small {
+  font-size: 14px;
+}
+
+.remark-code {
+  font-size: 13px;
+}
+
+.pull-left-bigger {
+  float: left;
+  width: 70%;
+}
+.pull-right-smaller {
+  float: right;
+  width: 29%;
+}
