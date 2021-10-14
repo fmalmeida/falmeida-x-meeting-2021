@@ -86,20 +86,27 @@ class: middle
 
     + Sequencing whole genomes from viral or bacterial pathogens 
     
-      + Unprecedented resolution of pathogen genetic makeup
+    + Unprecedented resolution of pathogen genetic makeup
       
-      + To identify outbreak origins and track transmissions
+    + To identify outbreak origins and track transmissions
     
-      + Investigate epidemic dynamics
+    + Investigate epidemic dynamics
       
-      + Enables identification of virulence 
+    + Enables identification of virulence
+
+???
+
+* NGS data is being successfully used for the study and control of infectious diseases which is giving rise to a relatively new field called *Genomic surveillance*.
+
+* The pillars of this filed is that the massive genome sequencing of pathogens enable the identification of outbreaks sources, track transmissions, investigate epidemic dynamics, investigate resistance and virulence traits, and more.
+
+* All of that because of the high resolution genetic makeup of the pathogens provided by sequencing.
 
 --
 
 .bg-washed-blue.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt0[
-This combination idea has been further reinforced with the ongoing genomic characterization in the context Sars-CoV-2 pandemics 
+This idea is being reinforced with the ongoing genomic surveillance of the virus during the Sars-CoV-2 pandemics 
 ]
-
 
 ---
 
@@ -113,32 +120,36 @@ This combination idea has been further reinforced with the ongoing genomic chara
 
     + Selection and installation of tools and resources
     
-    <!-- + Staff training -->
-    
     + Preparation of data
     
     + Execution of analysis
     
     + Interpretation of results
 
---
-
 .bg-washed-blue.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt0[
-These may pose a great hindrance to the implementation of genomics routines
+These pose a great hindrance to the implementation of genomics routines
 ]
 
---
+???
+
+* However the implementation of such practices in clinical settings are still a challenge because it heavily depends on bioinformatics skills and expertise, such as:
+
+* Selecting the right sequencing platform
+* Prepare the input data, analyse it and interpret the results in practical information and solutions
 
 ---
 
 class: middle, center, inverse
 
-# Thus, there is a pressing need for a comprehensive software solution 
+# Thus, there is a pressing need for a comprehensive software solution
+
+???
+
+Therefore, there is a urgent need for a comprehensive solution that mitigates such hindrance.
 
 ---
 
 # Container-based pipelines
-
 
 .pull-left[
 <br>
@@ -156,6 +167,11 @@ class: middle, center, inverse
 <img src="IMAGES/sc-software.png" width="700px">
 ]
 
+???
+
+In order to address this need, we developed three sequential pipelines that together, as we can see in the image, provide a comprehensive workflow for raw data preprocessing, genome assembly and bacterial genome annotation.
+
+All that adaptable to different scenarios, meaning that users can use different combinations of data from Illumina, Pacbio and Nanopore sequencing platforms.
 
 ---
 
@@ -165,7 +181,7 @@ class: middle, center, inverse
 This container-based implementation leverages:
 
 + Portability
-    + Dependencies are packed in `r fontawesome("docker")` conteiners which makes installation easy:
+    + Dependencies are packed in `r fontawesome("docker")` containers which makes installation easy:
     + `docker pull <image>`
 + Reproducibility
     + Nextflow ensures the execution of the pipeline for different datasets
@@ -185,6 +201,18 @@ This container-based implementation leverages:
 <img src="IMAGES/usage_overview_docker.png">
 
 ]
+
+???
+
+* The pipelines were implemented in Nextflow and all the tools are wrapped inside docker containers.
+
+* The distribution is made via Github and Dockerhub, which makes installation be quick and easy, only being required to download the pipeline and the docker images.
+
+* Moreover, since the pipelines are implemented in nextflow, they are:
+
+    + Extremely reproducible, meaning nextflow will ensure the same execution for different datasets
+    
+    + Highly scalable because nextflow provides easy parallelization of jobs and easy portability to clusters, meaning the pipelines can be easily used in any machine, from laptos to HPCs, from 1 to 1000s samples.
 
 ---
 
@@ -210,6 +238,16 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 <br>
 <img src="IMAGES/sc-config.png">
 ]
+
+???
+
+* Here we can see how simple it is to use the pipelines!
+
+    + The command `nextflow run` will download the pipeline if not already available and execute it!
+
+* The simplest use is via a configuration file which will point to where your input data is, and a few configurations where you set some parameters such as: the input data type, quality thresholds, steps to skip, etc.
+
+* All parameters can be set via the command line, however it is easier and cleaner to use the configuration file which is exemplified in the image on the right.
 
 ---
 
@@ -238,6 +276,18 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 <img src="IMAGES/sc-software-bacannot.png" width="450px">
 </center>
 ]
+
+???
+
+* To exemplify one of the pipelines, I will discuss the implementation of the annotation pipeline.
+
+* Bacannot is a comprehensive annotation pipeline which performs various types of annotations steps, from CDS and rRNA prediction, to focused annotation and detection of plasmids, genomic islands, prophages, integrative and conjugative elements, virulence and antimicrobial resistance genes, and more.
+
+* All that while providing nice alternatives for results visualization and interpretation, such as: HTML reports, a genome browser, and a web app for "interrogation" of all the results
+
+* Although comprehensive, the pipeline is modular, meaning that users can skip annotation steps if desired.
+
+* Which also makes the pipeline highly adaptable to the community needs, meaning that new steps and modules can be rapidly added without because it does not require to "change" the whole pipeline.
 
 ---
 
