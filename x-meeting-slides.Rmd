@@ -283,11 +283,11 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 * Bacannot is a comprehensive annotation pipeline which performs various types of annotations steps, from CDS and rRNA prediction, to focused annotation and detection of plasmids, genomic islands, prophages, integrative and conjugative elements, virulence and antimicrobial resistance genes, and more.
 
-* All that while providing nice alternatives for results visualization and interpretation, such as: HTML reports, a genome browser, and a web app for a compact way of exploring and querying the results
-
 * Although comprehensive, the pipeline is modular, meaning that users can skip annotation steps if desired.
 
-* Which also makes the pipeline highly adaptable to the community needs, meaning that new steps and modules can be rapidly added without because it does not require to "change" the whole pipeline.
+* Which also makes the it highly adaptable to the community needs, meaning that new steps and modules can be rapidly added because it does not require to "change" the whole pipeline.
+
+* All that while providing nice alternatives for results visualization and interpretation, such as: HTML reports, a genome browser, and a web app for a compact way of exploring and querying the results
 
 ---
 
@@ -299,6 +299,10 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 <img src="IMAGES/amr-report-sc.png" width="95%">
 </center>
 
+???
+
+* All that while providing nice alternatives for results visualization and interpretation, such as: HTML reports, a genome browser, and a web app for a compact way of exploring and querying the results
+
 ---
 
 # Bacannot outputs: Genome browser
@@ -309,6 +313,10 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 <img src="https://bacannot.readthedocs.io/en/latest/_images/jbrowse.png" width="90%">
 </center>
 
+???
+
+* All that while providing nice alternatives for results visualization and interpretation, such as: HTML reports, a genome browser, and a web app for a compact way of exploring and querying the results
+
 ---
 
 # Bacannot outputs: web (shiny) app
@@ -318,6 +326,10 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 <center>
 <img src="https://bacannot.readthedocs.io/en/latest/_images/bacannot_shiny.gif" width="900" height="400">
 </center>
+
+???
+
+* All that while providing nice alternatives for results visualization and interpretation, such as: HTML reports, a genome browser, and a web app for a compact way of exploring and querying the results
 
 ---
 class: inverse, middle, center
