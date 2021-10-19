@@ -105,7 +105,7 @@ class: middle
 --
 
 .bg-washed-blue.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt0[
-This idea is being reinforced with the ongoing genomic surveillance of the virus during the Sars-CoV-2 pandemics 
+This idea is being currently reinforced with the ongoing genomic surveillance performed during the Sars-CoV-2 pandemics 
 ]
 
 ---
@@ -127,7 +127,7 @@ This idea is being reinforced with the ongoing genomic surveillance of the virus
     + Interpretation of results
 
 .bg-washed-blue.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt0[
-These pose a great hindrance to the implementation of genomics routines
+These pose a great hindrance to the implementation of genomics routines in clinical settings
 ]
 
 ???
@@ -153,14 +153,14 @@ Therefore, there is a urgent need for a comprehensive solution that mitigates su
 
 .pull-left[
 <br>
-* In order to mitigate such hindrance, we developed three sequential pipelines:
+* In order to mitigate such hindrance, we started in 2018 to develop three sequential pipelines:
 
     + `r fontawesome("github")` [ngs-preprocess](https://github.com/fmalmeida/ngs-preprocess)
     + `r fontawesome("github")` [MpGAP](https://github.com/fmalmeida/mpgap)
     + `r fontawesome("github")` [bacannot](https://github.com/fmalmeida/bacannot)
 
-* Adaptable to different scenarios
-    + With different combinations of data from the main sequencing platforms.
+* Adaptable to different data scenarios
+    + Accepting different combinations of data from the main sequencing platforms.
 ]
 
 .pull-right[
@@ -169,7 +169,7 @@ Therefore, there is a urgent need for a comprehensive solution that mitigates su
 
 ???
 
-In order to address this need, we developed three sequential pipelines that together, as we can see in the image, provide a comprehensive workflow for raw data preprocessing, genome assembly and bacterial genome annotation.
+In order to address this need, we developed three sequential pipelines that together (point to them in the image) provide a comprehensive workflow for raw data preprocessing, genome assembly and bacterial genome annotation.
 
 All that adaptable to different scenarios, meaning that users can use different combinations of data from Illumina, Pacbio and Nanopore sequencing platforms.
 
@@ -195,7 +195,7 @@ This container-based implementation leverages:
 
 **Distribution**
 
-* Pipelines are available in github `r fontawesome("github")`
+* Nextflow pipelines are available in github `r fontawesome("github")`
 * Tools are available in docker images `r fontawesome("docker")` 
 
 <img src="IMAGES/usage_overview_docker.png">
@@ -204,9 +204,7 @@ This container-based implementation leverages:
 
 ???
 
-* The pipelines were implemented in Nextflow and all the tools are wrapped inside docker containers.
-
-* The distribution is made via Github and Dockerhub, which makes installation be quick and easy, only being required to download the pipeline and the docker images.
+* The pipelines were implemented in Nextflow and all the tools are wrapped inside docker containers, which makes distribution and installation be quick and easy, only being required to download the pipeline from github and the docker images from dockerhub.
 
 * Moreover, since the pipelines are implemented in nextflow, they are:
 
@@ -220,7 +218,7 @@ This container-based implementation leverages:
 
 .pull-left[
 
-* Pipelines are executed in a single command.
+* Pipelines are installed (if necessary) and executed in a single command.
 
     + Parameters can be given as CLI arguments but config files are recommended.
 
@@ -245,9 +243,7 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
     + The command `nextflow run` will download the pipeline if not already available and execute it!
 
-* The simplest use is via a configuration file which will point to where your input data is, and a few configurations where you set some parameters such as: the input data type, quality thresholds, steps to skip, etc.
-
-* All parameters can be set via the command line, however it is easier and cleaner to use the configuration file which is exemplified in the image on the right.
+* All parameters can be set via the command line, however it is easier and cleaner to use the configuration file which is exemplified in the image on the right. This is the simplest way to configure and use the pipelines.
 
 ---
 
@@ -285,7 +281,7 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 * Although comprehensive, the pipeline is modular, meaning that users can skip annotation steps if desired.
 
-* Which also makes the it highly adaptable to the community needs, meaning that new steps and modules can be rapidly added because it does not require to "change" the whole pipeline.
+* Which also makes the it highly adaptable to the community needs, meaning that new steps and modules can be rapidly added because it does not require changes in the whole pipeline.
 
 * All that while providing nice alternatives for results visualization and interpretation, such as: HTML reports, a genome browser, and a web app for a compact way of exploring and querying the results
 
