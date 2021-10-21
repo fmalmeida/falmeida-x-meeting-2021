@@ -3,7 +3,7 @@ title: "X-meeting 2021"
 subtitle: "Scalable and versatile container-based pipelines for comprehensive bacterial genomics analyses"  
 author: 
   - "Felipe M. Almeida"
-  - "University of Brasilia"
+  - "University of Brasilia, Department of Cell Biology"
 date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:

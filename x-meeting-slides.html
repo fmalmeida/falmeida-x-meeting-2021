@@ -4,8 +4,8 @@
     <title>X-meeting 2021</title>
     <meta charset="utf-8" />
     <meta name="author" content="Felipe M. Almeida" />
-    <meta name="author" content="University of Brasilia" />
-    <meta name="date" content="2021-10-19" />
+    <meta name="author" content="University of Brasilia, Department of Cell Biology" />
+    <meta name="date" content="2021-10-21" />
     <script src="x-meeting-slides_files/header-attrs/header-attrs.js"></script>
     <script src="x-meeting-slides_files/fabric/fabric.min.js"></script>
     <link href="x-meeting-slides_files/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
@@ -41,8 +41,8 @@ class: center, middle, inverse, title-slide
 # X-meeting 2021
 ## Scalable and versatile container-based pipelines for comprehensive bacterial genomics analyses
 ### Felipe M. Almeida
-### University of Brasilia
-### 2021-10-19
+### University of Brasilia, Department of Cell Biology
+### 2021-10-21
 
 ---
 
@@ -413,6 +413,30 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   height: 210px;
   z-index: 0;
 }
+
+.logo2 {
+  background-image: url(IMAGES/ppgbiomol_381x107.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  width: 200px;
+  height: 210px;
+  z-index: 0;
+}
+
+.logo3 {
+  background-image: url(IMAGES/cnpq-logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: -5em;
+  left: 1em;
+  width: 200px;
+  height: 210px;
+  z-index: 0;
+}
 </style>
 
 <script>
@@ -426,6 +450,19 @@ document
   )
   .forEach(el => {
     el.innerHTML += '<div class="logo"></div>';
+  });
+document
+  .querySelectorAll(
+    '.title-slide'
+    //'.remark-slide-content' +
+    //':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    //':not(.inverse)' +
+    //':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo2"></div>';
+    el.innerHTML += '<div class="logo3"></div>';
   });
 </script>
 
