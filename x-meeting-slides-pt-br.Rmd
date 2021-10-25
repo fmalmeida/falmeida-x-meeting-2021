@@ -176,25 +176,25 @@ All that adaptable to different scenarios, meaning that users can use different 
 # Implementação
 
 .pull-left[
-This container-based implementation leverages:
+A implementação baseada em contêineres permite:
 
-+ Portability
-    + Dependencies are packed in `r fontawesome("docker")` containers which makes installation easy:
++ Portabilidade
+    + Dependências empacotadas em `r fontawesome("docker")`, facilitando a instalação:
     + `docker pull <image>`
-+ Reproducibility
-    + Nextflow ensures the execution of the pipeline for different datasets
-+ Scalability
-    + Nextflow provides easy parallelization and implementation of pipelines in any machine, from laptops to HPCs
-+ Error "tolerance"
-    + Nextflow tracks each process and provide checkpoints and clear error messages for easy pipeline "restart" in case of errors.
++ Reprodutibilidade
+    + Nextflow assegura a execução do _pipeline_ para diferentes conjuntos de dados
++ Escalabilidade
+    + Nextflow provê uma maneira simples de paralelizar e implementar trabalhos em qualquer máquina, de laptos a super computadores
++ Tolerância a erros
+    + Nextflow rastreia cada processo e cria _checkpoints_ permitindo pontos de reinício em caso de erros
 ]
 
 .pull-right[
 
-**Distribution**
+**Distribuição**
 
-* Nextflow pipelines are available in github `r fontawesome("github")`
-* Tools are available in docker images `r fontawesome("docker")` 
+* Pipelines disponíveis no github `r fontawesome("github")`
+* Ferramentas empacotadas em imagens `r fontawesome("docker")` 
 
 <img src="IMAGES/usage_overview_docker.png">
 
@@ -212,13 +212,14 @@ This container-based implementation leverages:
 
 ---
 
-# Easy installation and execution
+# Instalação e execução simplificadas
 
 .pull-left[
 
-* Pipelines are installed (if necessary) and executed in a single command.
+* Os _pipelines_ são instalados e executados em comando único.
 
-    + Parameters can be given as CLI arguments but config files are recommended.
+    + Parâmetros podem ser passados em linha de comando
+    + Mas recomenda-se o uso de arquivos de configuração
 
 ```bash
 nextflow run fmalmeida/ngs-preprocess -c config.txt
@@ -229,7 +230,7 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 ]
 
 .pull-right[
-* Config file template
+* Arquivo de configuração
 
 <br>
 <img src="IMAGES/sc-config.png">
@@ -245,23 +246,23 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 ---
 
-# Bacannot, the annotation pipeline
+# Bacannot, _pipeline_ de anotação
 
 .pull-left[
-* Bacannot was designed to be comprehensive!
+* Bacannot foi desenhado para ser bastante abrangente!
 
-    + But also modular
+    + Mas modular
         
-        + analyses can be skipped by user
+        + Análises podem ser "desligadas"
     
-    + From one to thousand genomes at once
+    + Escalonável de um a milhares de genomas
     
-    + Nice reports and a web app for results exploration
+    + Relatórios claros e um aplicativo-web para exploração dos resultados
 
-* Since it is based on modules, it can rapidly adapt to the community:
+* Por ser escrito em módulos, pode rapidamente se adaptar a necessidades da comunidade:
     
-    + New reports
-    + New analyses
+    + Novos relatórios
+    + Novas análises
     + Etc.
 ]
 
@@ -285,9 +286,9 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 ---
 
-# Bacannot outputs: HTML Reports
+# Bacannot _outputs_: Relatórios
 
-* Example: AMR report
+* Example: Relatório AMR
 
 <center>
 <img src="IMAGES/amr-report-sc.png" width="95%">
@@ -301,7 +302,7 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 ---
 
-# Bacannot outputs: Genome browser
+# Bacannot _outputs_: Genome browser
 
 * All annotation available in the browser
 
@@ -315,9 +316,9 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 ---
 
-# Bacannot outputs: web (shiny) app
+# Bacannot _outputs_: web (shiny) app
 
-* A web-app to query the results
+* Uma aplicação-web para explorar os resultados
 
 <center>
 <img src="https://bacannot.readthedocs.io/en/latest/_images/bacannot_shiny.gif" width="900" height="400">
@@ -332,4 +333,4 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 ---
 class: inverse, middle, center
 
-# Thanks!
+# Obrigado!
