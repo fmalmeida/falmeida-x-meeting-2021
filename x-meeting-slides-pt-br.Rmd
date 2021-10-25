@@ -77,22 +77,20 @@ style_duo_accent(
   # title_slide_text_color = blue,
 ```
 
-class: middle
+# Contexto
 
-# Why?
+* Sequenciamento de próxima geração (NGS) vem sendo utilizado com sucesso no contexto de pesquisas e acompanhamento de doenças infecciosas
+* Dando início a uma nova área: *Vigilância genômica*
 
-* Next generation sequencing (NGS) has been successfully used in the context of infectious disease research of public health relevance
-* A relatively new field is emerging: *Genomic surveillance*
-
-    + Sequencing whole genomes from viral or bacterial pathogens 
+    + Sequenciamento de genoma completo de patógenos virais e bacterianos
     
-    + Unprecedented resolution of pathogen genetic makeup
-      
-    + To identify outbreak origins and track transmissions
+    + Resolução sem prescedentes do conteúdo genético do patógeno
     
-    + Investigate epidemic dynamics
-      
-    + Enables identification of virulence
+    + Identificação de origens de epidemias e rastreamento de transmissões
+    
+    + Investigação da dinâmica de epidemias
+    
+    + Identificação de conteúdo de virulência e resistência
 
 ???
 
@@ -105,29 +103,29 @@ class: middle
 --
 
 .bg-washed-blue.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt0[
-This idea is being currently reinforced with the ongoing genomic surveillance performed during the Sars-CoV-2 pandemics 
+Esta ideia está sendo reforçada devido a vigilância genômica que vem sendo relizada durante a pandemia do Sars-CoV-2 
 ]
 
 ---
 
-# However...
+# Porém ...
 
-* Although of great relevance, the implementation of such practices remain a challenge in research and public health laboratories
+* Apesar de sua relevância, a implementação destas práticas em meios clínicos permanece um grande desafio
 
-* The overall analysis depends on bioinformatics skills and expertise:
-    
-    + Selection of sequencing platform
+* De maneira geral, as análises dependem bastante de habilidades e expertise em bioinformática.
 
-    + Selection and installation of tools and resources
+    + Seleção da plataforma de sequenciamento
+
+    + Seleção e instalação das ferramentas e recursos
     
-    + Preparation of data
+    + Preparação dos dados
     
-    + Execution of analysis
+    + Execução da análise
     
-    + Interpretation of results
+    + Interpretação dos resultados
 
 .bg-washed-blue.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt0[
-These pose a great hindrance to the implementation of genomics routines in clinical settings
+Estas questões apresentam grande barreira para a implementação de rotinas de sequenciamento em ambientes clínicos
 ]
 
 ???
@@ -141,7 +139,7 @@ These pose a great hindrance to the implementation of genomics routines in clini
 
 class: middle, center, inverse
 
-# Thus, there is a pressing need for a comprehensive software solution
+# Urgência por soluções de programas completos e abrangentes
 
 ???
 
@@ -149,22 +147,22 @@ Therefore, there is a urgent need for a comprehensive solution that mitigates su
 
 ---
 
-# Container-based pipelines
+# _Pipelines_ baseados em contêineres
 
 .pull-left[
 <br>
-* In order to mitigate such hindrance, we started in 2018 to develop three sequential pipelines:
+* Para tentar mitigar estas barreiras, desenvolvemos 3 _pipelines_ sequenciais:
 
     + `r fontawesome("github")` [ngs-preprocess](https://github.com/fmalmeida/ngs-preprocess)
     + `r fontawesome("github")` [MpGAP](https://github.com/fmalmeida/mpgap)
     + `r fontawesome("github")` [bacannot](https://github.com/fmalmeida/bacannot)
 
-* Adaptable to different data scenarios
-    + Accepting different combinations of data from the main sequencing platforms.
+* Adaptável a diferentes cenários
+    + Diferentes combinações de dados das principais plataformas de sequenciamento.
 ]
 
 .pull-right[
-<img src="IMAGES/sc-software.png" width="700px">
+<img src="IMAGES/sc-software.svg" width="700px">
 ]
 
 ???
@@ -175,7 +173,7 @@ All that adaptable to different scenarios, meaning that users can use different 
 
 ---
 
-# Implementation
+# Implementação
 
 .pull-left[
 This container-based implementation leverages:

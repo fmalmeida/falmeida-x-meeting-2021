@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="author" content="Felipe M. Almeida" />
     <meta name="author" content="Departamento de Biologia Celular, Universidade de Brasília" />
-    <meta name="date" content="2021-10-23" />
+    <meta name="date" content="2021-10-25" />
     <script src="x-meeting-slides-pt-br_files/header-attrs/header-attrs.js"></script>
     <script src="x-meeting-slides-pt-br_files/fabric/fabric.min.js"></script>
     <link href="x-meeting-slides-pt-br_files/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
@@ -42,7 +42,7 @@ class: center, middle, inverse, title-slide
 ## Pipelines versáteis e escalonáveis para análises genômicas bacterianas completas
 ### Felipe M. Almeida
 ### Departamento de Biologia Celular, Universidade de Brasília
-### 2021-10-23
+### 2021-10-25
 
 ---
 
@@ -51,22 +51,20 @@ class: center, middle, inverse, title-slide
 
 
 
-class: middle
+# Contexto
 
-# Why?
+* Sequenciamento de próxima geração (NGS) vem sendo utilizado com sucesso no contexto de pesquisas e acompanhamento de doenças infecciosas
+* Dando início a uma nova área: *Vigilância genômica*
 
-* Next generation sequencing (NGS) has been successfully used in the context of infectious disease research of public health relevance
-* A relatively new field is emerging: *Genomic surveillance*
-
-    + Sequencing whole genomes from viral or bacterial pathogens 
+    + Sequenciamento de genoma completo de patógenos virais e bacterianos
     
-    + Unprecedented resolution of pathogen genetic makeup
-      
-    + To identify outbreak origins and track transmissions
+    + Resolução sem prescedentes do conteúdo genético do patógeno
     
-    + Investigate epidemic dynamics
-      
-    + Enables identification of virulence
+    + Identificação de origens de epidemias e rastreamento de transmissões
+    
+    + Investigação da dinâmica de epidemias
+    
+    + Identificação de conteúdo de virulência e resistência
 
 ???
 
@@ -79,29 +77,29 @@ class: middle
 --
 
 .bg-washed-blue.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt0[
-This idea is being currently reinforced with the ongoing genomic surveillance performed during the Sars-CoV-2 pandemics 
+Esta ideia está sendo reforçada devido a vigilância genômica que vem sendo relizada durante a pandemia do Sars-CoV-2 
 ]
 
 ---
 
-# However...
+# Porém ...
 
-* Although of great relevance, the implementation of such practices remain a challenge in research and public health laboratories
+* Apesar de sua relevância, a implementação destas práticas em meios clínicos permanece um grande desafio
 
-* The overall analysis depends on bioinformatics skills and expertise:
-    
-    + Selection of sequencing platform
+* De maneira geral, as análises dependem bastante de habilidades e expertise em bioinformática.
 
-    + Selection and installation of tools and resources
+    + Seleção da plataforma de sequenciamento
+
+    + Seleção e instalação das ferramentas e recursos
     
-    + Preparation of data
+    + Preparação dos dados
     
-    + Execution of analysis
+    + Execução da análise
     
-    + Interpretation of results
+    + Interpretação dos resultados
 
 .bg-washed-blue.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt0[
-These pose a great hindrance to the implementation of genomics routines in clinical settings
+Estas questões apresentam grande barreira para a implementação de rotinas de sequenciamento em ambientes clínicos
 ]
 
 ???
@@ -115,7 +113,7 @@ These pose a great hindrance to the implementation of genomics routines in clini
 
 class: middle, center, inverse
 
-# Thus, there is a pressing need for a comprehensive software solution
+# Urgência por soluções de programas completos e abrangentes
 
 ???
 
@@ -123,22 +121,22 @@ Therefore, there is a urgent need for a comprehensive solution that mitigates su
 
 ---
 
-# Container-based pipelines
+# _Pipelines_ baseados em contêineres
 
 .pull-left[
 &lt;br&gt;
-* In order to mitigate such hindrance, we started in 2018 to develop three sequential pipelines:
+* Para tentar mitigar estas barreiras, desenvolvemos 3 _pipelines_ sequenciais:
 
     + &lt;svg viewBox="0 0 496 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; [ngs-preprocess](https://github.com/fmalmeida/ngs-preprocess)
     + &lt;svg viewBox="0 0 496 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; [MpGAP](https://github.com/fmalmeida/mpgap)
     + &lt;svg viewBox="0 0 496 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; [bacannot](https://github.com/fmalmeida/bacannot)
 
-* Adaptable to different data scenarios
-    + Accepting different combinations of data from the main sequencing platforms.
+* Adaptável a diferentes cenários
+    + Diferentes combinações de dados das principais plataformas de sequenciamento.
 ]
 
 .pull-right[
-&lt;img src="IMAGES/sc-software.png" width="700px"&gt;
+&lt;img src="IMAGES/sc-software.svg" width="700px"&gt;
 ]
 
 ???
@@ -149,7 +147,7 @@ All that adaptable to different scenarios, meaning that users can use different 
 
 ---
 
-# Implementation
+# Implementação
 
 .pull-left[
 This container-based implementation leverages:
