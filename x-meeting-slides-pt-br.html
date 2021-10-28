@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Simpósio de Biologia Molecular - 2021</title>
+    <title>Simpósio de Biologia Molecular</title>
     <meta charset="utf-8" />
     <meta name="author" content="Felipe M. Almeida" />
     <meta name="author" content="Departamento de Biologia Celular, Universidade de Brasília" />
-    <meta name="date" content="2021-10-25" />
     <script src="x-meeting-slides-pt-br_files/header-attrs/header-attrs.js"></script>
-    <script src="x-meeting-slides-pt-br_files/fabric/fabric.min.js"></script>
-    <link href="x-meeting-slides-pt-br_files/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
-    <script src="x-meeting-slides-pt-br_files/xaringanExtra-scribble/scribble.js"></script>
-    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
     <script src="x-meeting-slides-pt-br_files/mark.js/mark.min.js"></script>
     <link href="x-meeting-slides-pt-br_files/xaringanExtra-search/search.css" rel="stylesheet" />
     <script src="x-meeting-slides-pt-br_files/xaringanExtra-search/search.js"></script>
@@ -38,11 +33,11 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Simpósio de Biologia Molecular - 2021
+# Simpósio de Biologia Molecular
 ## Pipelines versáteis e escalonáveis para análises genômicas bacterianas completas
 ### Felipe M. Almeida
 ### Departamento de Biologia Celular, Universidade de Brasília
-### 2021-10-25
+### November 2021
 
 ---
 
@@ -53,18 +48,20 @@ class: center, middle, inverse, title-slide
 
 # Contexto
 
+.pull-left[
 * Sequenciamento de próxima geração (NGS) vem sendo utilizado com sucesso no contexto de pesquisas e acompanhamento de doenças infecciosas
-* Dando início a uma nova área: *Vigilância genômica*
 
-    + Sequenciamento de genoma completo de patógenos virais e bacterianos
+    + Sequenciamento de genoma completo de patógenos
     
-    + Resolução sem prescedentes do conteúdo genético do patógeno
-    
-    + Identificação de origens de epidemias e rastreamento de transmissões
-    
-    + Investigação da dinâmica de epidemias
-    
-    + Identificação de conteúdo de virulência e resistência
+        + Alta resolução do conteúdo genético
+        + Investigação do conteúdo de virulência, resistência, elementos móveis, etc.
+        
+    + Identificação de origens de epidemias
+        + rastreamento de transmissões
+        + Investigação da dinâmica
+
+* Nova área: **Vigilância genômica**
+]
 
 ???
 
@@ -75,9 +72,13 @@ class: center, middle, inverse, title-slide
 * All of that because of the high resolution genetic makeup of the pathogens provided by sequencing.
 
 --
-
+.pull-right[
 .bg-washed-blue.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt0[
-Esta ideia está sendo reforçada devido a vigilância genômica que vem sendo relizada durante a pandemia do Sars-CoV-2 
+Aplicação se tornando cada vez mais concreta durante a atual pandemia do Sars-CoV-2 
+]
+&lt;br&gt;
+&lt;br&gt;
+&lt;img src="https://media.springernature.com/lw685/springer-static/image/art%3A10.1186%2Fs40246-021-00326-3/MediaObjects/40246_2021_326_Fig1_HTML.png"&gt;
 ]
 
 ---
@@ -123,7 +124,11 @@ Therefore, there is a urgent need for a comprehensive solution that mitigates su
 
 # _Pipelines_ baseados em contêineres
 
-.pull-left[
+.pull-left-bigger[
+&lt;img src="IMAGES/sc-software.svg" width="700px"&gt;
+]
+
+.pull-right-smaller[
 &lt;br&gt;
 * Para tentar mitigar estas barreiras, desenvolvemos 3 _pipelines_ sequenciais:
 
@@ -132,11 +137,9 @@ Therefore, there is a urgent need for a comprehensive solution that mitigates su
     + &lt;svg viewBox="0 0 496 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"&gt;&lt;/path&gt;&lt;/svg&gt; [bacannot](https://github.com/fmalmeida/bacannot)
 
 * Adaptável a diferentes cenários
-    + Diferentes combinações de dados das principais plataformas de sequenciamento.
-]
-
-.pull-right[
-&lt;img src="IMAGES/sc-software.svg" width="700px"&gt;
+    + Illumina
+    + Pacbio
+    + ONT
 ]
 
 ???
@@ -226,12 +229,14 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 * Bacannot foi desenhado para ser bastante abrangente!
 
     + Mas modular
-        
         + Análises podem ser "desligadas"
     
     + Escalonável de um a milhares de genomas
     
     + Relatórios claros e um aplicativo-web para exploração dos resultados
+    
+    + Muito bem documentado
+        + https://bacannot.readthedocs.io/en/latest/
 
 * Por ser escrito em módulos, pode rapidamente se adaptar a necessidades da comunidade:
     
@@ -239,6 +244,7 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
     + Novas análises
     + Etc.
 ]
+
 
 .pull-right[
 &lt;center&gt;
@@ -292,17 +298,88 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 # Bacannot _outputs_: web (shiny) app
 
-* Uma aplicação-web para explorar os resultados
+.pull-left-bigger[
+![](IMAGES/bacannot_shiny.gif)
+]
 
-&lt;center&gt;
-&lt;img src="https://bacannot.readthedocs.io/en/latest/_images/bacannot_shiny.gif" width="900" height="400"&gt;
-&lt;/center&gt;
+.pull-right-smaller[
+* Indexação dos relatórios de anotação
+
+* Visualização do navegador genômico
+
+* Exploração e interrogação dos resultados armazenados em SQL
+
+* BLAST dinâmico:
+
+    + Maneira tabular para identificação das posições e interseção com anotação
+    
+    + Para visualização do alinhamento com [SequenceServer](https://sequenceserver.com/)
+]
 
 ???
 
 * And also a a web app for a compact way of exploring and querying the results.
 
 * Here we can see different tabs which list all the HTML reports, a tab for querying the results stored in a SQLdb so users can rapidply filter and interrogate their data and a tab providing a way to BLAST your input and visualize whether the BLAST results intersect with the annotations results produced with the pipeline.
+
+---
+
+# Trabalhos realizados
+
+* Multidrug-Resistant (MDR) _Klebsiella variicola_ Strains Isolated in a Brazilian Hospital Belong to New Clones
+    
+    + https://doi.org/10.3389/fmicb.2021.604031
+
+&lt;center&gt;
+&lt;img src="https://www.frontiersin.org/files/Articles/604031/fmicb-12-604031-HTML-r1/image_m/fmicb-12-604031-g002.jpg" width="45%" /&gt;&lt;img src="https://www.frontiersin.org/files/Articles/604031/fmicb-12-604031-HTML-r1/image_m/fmicb-12-604031-g003.jpg" width="45%" /&gt;
+&lt;/center&gt;
+
+---
+
+# Trabalhos realizados
+
+* A novel multidrug resistant, non-Tn4401 genetic element (NTEKPC)-bearing, strain type of _Klebsiella pneumoniae_ isolated from an urban lake with drinking and recreational water reuse 
+    
+    + Em revisão (frontiers)
+
+&lt;center&gt;
+&lt;img src="IMAGES/ggtree_test.svg" width="250"&gt; &lt;img src="IMAGES/gcluster.svg" width="400"&gt;
+&lt;/center&gt;
+
+---
+
+# Trabalhos realizados
+
+* Genomic and physiological characterization of _Novosphingobium terrae_ sp. nov., an alphaproteobacterium isolated from Cerrado soil
+    
+    + Em revisão (Spectrum)
+
+&lt;center&gt;
+&lt;img src="IMAGES/n_sp_dnaplotter.png" width="400"&gt; &lt;img src="IMAGES/Figure7_sulfur.svg" width="450"&gt;
+&lt;/center&gt;
+
+---
+
+# Perspectivas
+
+* Criar um programa de **genômica comparativa** que receba os resultados do _pipeline_ de anotação
+
+    + `bacannot-compare`
+    + Pangenoma, filogenia, comparação de conteúdo funcional, resistência, STs, etc.
+
+.pull-left[
+&lt;img src="IMAGES/ko_comparison_snapshot.png" width="400"&gt;
+&lt;img src="IMAGES/gingr_snapshot.png" width="400"&gt;
+]
+
+.pull-right[
+&lt;br&gt;
+&lt;br&gt;
+&lt;img src="IMAGES/pan_genome.svg"&gt;
+&lt;center&gt;
+&lt;img src="IMAGES/pangenome_frequency.svg" width="30%" /&gt;&lt;img src="IMAGES/pangenome_pie.svg" width="30%" /&gt;&lt;img src="IMAGES/pangenome_matrix.svg" width="30%" /&gt;
+&lt;/center&gt;
+]
 
 ---
 class: inverse, middle, center
