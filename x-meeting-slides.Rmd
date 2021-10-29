@@ -58,6 +58,7 @@ xaringanExtra::use_extra_styles(
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
 library(xaringanthemer)
 style_duo_accent(
+  outfile = 'xaringan-themer.css',
   primary_color = "#a3b6e1",
   secondary_color = "#445588",
   link_color = "darkblue",
@@ -317,13 +318,25 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 ---
 
-# Bacannot outputs: web (shiny) app
+# Bacannot _outputs_: web (shiny) app
 
-* A web-app to query the results
+.pull-left-bigger[
+![](IMAGES/bacannot_shiny.gif)
+]
 
-<center>
-<img src="https://bacannot.readthedocs.io/en/latest/_images/bacannot_shiny.gif" width="900" height="400">
-</center>
+.pull-right-smaller[
+* Indexation of annotation reports
+
+* Genome Browser navigation
+
+* Interrogation fo results stored in SQL
+
+* Dynamic BLAST:
+
+    + Tabular-like to identify positions and intersections with annotation
+    
+    + For alignment visualization with [SequenceServer](https://sequenceserver.com/)
+]
 
 ???
 

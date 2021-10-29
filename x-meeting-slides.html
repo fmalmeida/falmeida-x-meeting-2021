@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="author" content="Felipe M. Almeida" />
     <meta name="author" content="University of Brasilia, Department of Cell Biology" />
-    <meta name="date" content="2021-10-21" />
+    <meta name="date" content="2021-10-29" />
     <script src="x-meeting-slides_files/header-attrs/header-attrs.js"></script>
     <script src="x-meeting-slides_files/fabric/fabric.min.js"></script>
     <link href="x-meeting-slides_files/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
@@ -42,7 +42,7 @@ class: center, middle, inverse, title-slide
 ## Scalable and versatile container-based pipelines for comprehensive bacterial genomics analyses
 ### Felipe M. Almeida
 ### University of Brasilia, Department of Cell Biology
-### 2021-10-21
+### 2021-10-29
 
 ---
 
@@ -291,13 +291,25 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 ---
 
-# Bacannot outputs: web (shiny) app
+# Bacannot _outputs_: web (shiny) app
 
-* A web-app to query the results
+.pull-left-bigger[
+![](IMAGES/bacannot_shiny.gif)
+]
 
-&lt;center&gt;
-&lt;img src="https://bacannot.readthedocs.io/en/latest/_images/bacannot_shiny.gif" width="900" height="400"&gt;
-&lt;/center&gt;
+.pull-right-smaller[
+* Indexation of annotation reports
+
+* Genome Browser navigation
+
+* Interrogation fo results stored in SQL
+
+* Dynamic BLAST:
+
+    + Tabular-like to identify positions and intersections with annotation
+    
+    + For alignment visualization with [SequenceServer](https://sequenceserver.com/)
+]
 
 ???
 

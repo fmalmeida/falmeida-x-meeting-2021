@@ -10,7 +10,7 @@ output:
   xaringan::moon_reader:
     includes:
       after_body: insert-logo.html
-    css: [xaringan-themer.css, custom.css]
+    css: [xaringan-themer-pt-br.css, custom.css]
     nature:
       slideNumberFormat: "%current%"
       highlightStyle: github
@@ -59,6 +59,7 @@ xaringanExtra::use_extra_styles(
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
 library(xaringanthemer)
 style_duo_accent(
+  outfile = 'xaringan-themer-pt-br.css',
   primary_color = "#a79ebf",
   secondary_color = "#906068",
   link_color = "darkblue",
