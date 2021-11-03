@@ -34,6 +34,18 @@
   height: 210px;
   z-index: 0;
 }
+
+.logo4 {
+  background-image: url(IMAGES/X-meeting20212.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: -6em;
+  right: 1em;
+  width: 200px;
+  height: 210px;
+  z-index: 0;
+}
 </style>
 
 <script>
@@ -60,5 +72,6 @@ document
   .forEach(el => {
     el.innerHTML += '<div class="logo2"></div>';
     el.innerHTML += '<div class="logo3"></div>';
+    el.innerHTML += '<div class="logo4"></div>';
   });
 </script>

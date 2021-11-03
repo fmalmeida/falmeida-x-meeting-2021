@@ -15,7 +15,7 @@ output:
       slideNumberFormat: "%current%"
       highlightStyle: github
       highlightLines: true
-      ratio: 16:9
+      ratio: 17:9
       countIncrementalSlides: true
 ---
 
@@ -98,11 +98,9 @@ style_duo_accent(
 
 ???
 
-* NGS data is being successfully used for the study and control of infectious diseases which is giving rise to a relatively new field called *Genomic surveillance*.
+* Atualmente, dados de sequenciamento de próxima geração vêm sendo utilizados com sucesso no estudo e controle de doenças infecciosas, o que vem dando origem a uma nova área chamada: vigilância genômica
 
-* The pillars of this filed is that the massive genome sequencing of pathogens enable the identification of outbreaks sources, track transmissions, investigate epidemic dynamics, investigate resistance and virulence traits, and more.
-
-* All of that because of the high resolution genetic makeup of the pathogens provided by sequencing.
+* Esta se baseia no sequenciamento massivo dos patógenos para identificar origem de epidemias, rastrear transmissões, investigar suas dinâmicas, genes de virulência e resistência, etc.
 
 --
 .pull-right[
@@ -113,6 +111,10 @@ Aplicação se tornando cada vez mais concreta durante a atual pandemia do Sars-
 <br>
 <img src="https://media.springernature.com/lw685/springer-static/image/art%3A10.1186%2Fs40246-021-00326-3/MediaObjects/40246_2021_326_Fig1_HTML.png">
 ]
+
+???
+
+* Área e aplicação tem ganhado bastante força recentemente devido a sua importância durante a atual pandemia do novo coronavírus.
 
 ---
 
@@ -132,16 +134,14 @@ Aplicação se tornando cada vez mais concreta durante a atual pandemia do Sars-
     
     + Interpretação dos resultados
 
+<br>
 .bg-washed-blue.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt0[
 Estas questões apresentam grande barreira para a implementação de rotinas de sequenciamento em ambientes clínicos
 ]
 
 ???
 
-* However the implementation of such practices in clinical settings are still a challenge because it heavily depends on bioinformatics skills and expertise, such as:
-
-* Selecting the right sequencing platform
-* Prepare the input data, analyse it and interpret the results in practical information and solutions
+* Porém, apesar de sua grande relevância, sua implementação real em ambientes clínicos ainda é bastante difícil pois depende muito de expertise e habilidades em bioinformática.
 
 ---
 
@@ -151,7 +151,7 @@ class: middle, center, inverse
 
 ???
 
-Therefore, there is a urgent need for a comprehensive solution that mitigates such hindrance.
+* Por isso, tem-se hoje uma urgência por soluções abrangentes para a fácil análise de dados genômicos
 
 ---
 
@@ -177,9 +177,10 @@ Therefore, there is a urgent need for a comprehensive solution that mitigates su
 
 ???
 
-In order to address this need, we developed three sequential pipelines that together (point to them in the image) provide a comprehensive workflow for raw data preprocessing, genome assembly and bacterial genome annotation.
-
-All that adaptable to different scenarios, meaning that users can use different combinations of data from Illumina, Pacbio and Nanopore sequencing platforms.
+* Para tentar mitigar estes problemas, nós desenvolvemos três pipelines:
+  + Os dois primeiros para pré-processamento e montagem de dados de sequenciamento das plataformas Illumina, Pacbio e Oxford Nanopore. Estes realizam a análise e montagem _de novo_ de forma "organismo inespecífico" e podem ser aplicados para diferentes tipos de amostras.
+  + E um pipeline de anotação bacteriana compreensivo que será detalhado um pouco mais na frente.
+  + Quando utilizados de maneira sequencial, estes pipelines provêem uma ferramenta computacional robusta para a análise completa de genomas bacterianos.
 
 ---
 
@@ -206,19 +207,15 @@ A implementação baseada em contêineres permite:
 * Pipelines disponíveis no github `r fontawesome("github")`
 * Ferramentas empacotadas em imagens `r fontawesome("docker")` 
 
-<img src="IMAGES/usage_overview_docker.png">
+<img src="IMAGES/usage_overview_docker.png" width="550px">
 
 ]
 
 ???
 
-* The pipelines were implemented in Nextflow and all the tools are wrapped inside docker containers, which makes distribution and installation be quick and easy, only being required to download the pipeline from github and the docker images from dockerhub.
-
-* Moreover, since the pipelines are implemented in nextflow, they are:
-
-    + Extremely reproducible, meaning nextflow will ensure the same execution for different datasets
-    
-    + Highly scalable because nextflow provides easy parallelization of jobs and easy portability to clusters, meaning the pipelines can be easily used in any machine, from laptos to HPCs, from 1 to 1000s samples.
+* Os pipelines foram implementados através de uma combinação entre Docker e Nextflow.
+* O Docker garante alta portabilidade ao tornar desnecessária a instalação das ferramentas pois todas se encontram instaladas em imagens docker públicas que são baixadas de maneira automática pelo nextflow.
+* E o nextflow garante reprodutibilidade, escalonabilidade por permitir fácil paralelização e utilização em HPCs e é extremamente tolerante a erros.
 
 ---
 
@@ -243,16 +240,13 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 * Arquivo de configuração
 
 <br>
-<img src="IMAGES/sc-config.png">
+<img src="IMAGES/sc-config.png" width="600px">
 ]
 
 ???
 
-* Here we can see how simple it is to use the pipelines!
-
-    + The command `nextflow run` will download the pipeline if not already available and execute it!
-
-* All parameters can be set via the command line, however it is easier and cleaner to use the configuration file which is exemplified in the image on the right. This is the simplest way to configure and use the pipelines.
+* Aqui podemos ver o quão simples é usar o pipeline. Através de um único comando, nextflow baixa o pipeline e suas imagens docker o oexecuta automaticamente.
+* Todos os comandos podem ser passados pela linha de comando, porém, é distribuído com o pipeline um arquivo de configuração extremamente detalhado que facilita a configuração e torna sua execução mais concisa.
 
 ---
 
@@ -287,37 +281,27 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 ???
 
-* To exemplify one of the pipelines, I will discuss the implementation of the annotation pipeline.
-
-* Bacannot is a comprehensive annotation pipeline which performs various types of annotations steps, from CDS and rRNA prediction, to focused annotation and detection of plasmids, genomic islands, prophages, integrative and conjugative elements, virulence and antimicrobial resistance genes, and more.
-
-* Although comprehensive, the pipeline is modular, meaning that users can skip annotation steps if desired.
-
-* Which also makes the it highly adaptable to the community needs, meaning that new steps and modules can be rapidly added because it does not require changes in the whole pipeline.
-
-* All that while providing nice alternatives for results visualization and interpretation, such as: HTML reports, a genome browser, and a web app for a compact way of exploring and querying the results
+* O pipeline de anotação, bacannot, é um pipeline robusto e abrangente.
+* Possui diversas etapas de anotações genéricas e especializadas como anotação de elementos genéticos móveis, metabótitos secundários, anotação funcional com ortologias KEGG, anotação de virulência e resistência, e muito mais.
+* Esta abrangência torna o pipeline extremamente versátil e útil para a grande maioria de amostras bacterianas, clínicas ou ambientais, diferente da maioria dos pipelines existentes que são extremamente focados em aspectos de relevância clínica.
+* Além disso, ele é implementado em módulos, o que permite a rápida adição de novas análises a depender da necessidade da comunidade.
+* Tudo isso enquanto providenciando ótimas alternativas para a visualização, interpretação e interrogação dos resultados. Como por exemplo:
 
 ---
 
-# Bacannot _outputs_: Relatórios
-
-* Example: Relatório AMR
+# Bacannot: Relatórios
 
 <center>
-<img src="IMAGES/amr-report-sc.png" width="95%">
+<img src="IMAGES/amr-report-sc.png" width="100%">
 </center>
 
 ???
 
-* All that while providing nice alternatives for results visualization and interpretation, such as: HTML reports
-
-* Here I show you the AMR report which have a tab summarizing the results of each specific tool.
+* Possui relatórios automatizados para cada uma das seções de anotação do pipeline. Aqui mostro o relatório de genes de resistência.
 
 ---
 
-# Bacannot _outputs_: Genome browser
-
-* All annotation available in the browser
+# Bacannot: Navegador genômico
 
 <center>
 <img src="https://bacannot.readthedocs.io/en/latest/_images/jbrowse.png" width="90%">
@@ -325,14 +309,14 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 ???
 
-* A genome browser which wraps up all the results obtained with the pipeline providing a beautiful way to visualize and investigate th results.
+* Possui um navegador genômico para a visualização de todos os resultados de forma interativa ao longo do genoma.
 
 ---
 
-# Bacannot _outputs_: web (shiny) app
+# Bacannot: web (shiny) app
 
 .pull-left-bigger[
-![](IMAGES/bacannot_shiny.gif)
+<img src="IMAGES/bacannot_shiny.gif">
 ]
 
 .pull-right-smaller[
@@ -351,9 +335,7 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 ???
 
-* And also a a web app for a compact way of exploring and querying the results.
-
-* Here we can see different tabs which list all the HTML reports, a tab for querying the results stored in a SQLdb so users can rapidply filter and interrogate their data and a tab providing a way to BLAST your input and visualize whether the BLAST results intersect with the annotations results produced with the pipeline.
+* Possui também uma aplicação web que condensa todos os relatórios no mesmo lugar, além de providenciar uma maneira rápida e fácil de interrogar e filtrar os resultados da anotação, e também providencia de forma integrada a possibilidade de realizar um BLAST contra o genoma e verificar se as sequências analisadas possuem interseção com algum resultado da anotação.
 
 ---
 
@@ -369,17 +351,25 @@ knitr::include_graphics(c("https://www.frontiersin.org/files/Articles/604031/fmi
 ```
 </center>
 
+* Para demonstrar a versatilidade do pipeline, eu trouxe alguns exemplos de trabalhos que foram realizados utilizando os resultados dos pipelines.
+
+* O primeiro, foi a análise de 5 cepas de _K. variicola_ relevantes clinicamente a qual, com os resultados do pipeline, exploramos a conservação e relevância de genes de virulência considerados relevantes para a espécie atualmente.
+
 ---
 
 # Trabalhos realizados
 
 * A novel multidrug resistant, non-Tn4401 genetic element (NTEKPC)-bearing, strain type of _Klebsiella pneumoniae_ isolated from an urban lake with drinking and recreational water reuse 
     
-    + Em revisão (frontiers)
+    + https://www.frontiersin.org/articles/10.3389/fmicb.2021.732324/abstract
 
 <center>
 <img src="IMAGES/ggtree_test.svg" width="250"> <img src="IMAGES/gcluster.svg" width="400">
 </center>
+
+???
+
+* O segundo, foi a análise de uma _K. pneumoniae_ ambiental na qual identificamos com os resultados do pipeline uma carbapenemase associada a um transposon que se mantém bem conservada ao longo de outras cepas de ambientes clínicos, indicando a movimentação deste gene e sua possível reserva em cepa ambiental.
 
 ---
 
@@ -390,8 +380,12 @@ knitr::include_graphics(c("https://www.frontiersin.org/files/Articles/604031/fmi
     + Em revisão (Spectrum)
 
 <center>
-<img src="IMAGES/n_sp_dnaplotter.png" width="400"> <img src="IMAGES/Figure7_sulfur.svg" width="450">
+<img src="IMAGES/n_sp_dnaplotter.png" width="500"> <img src="IMAGES/Figure7_sulfur.svg" width="550">
 </center>
+
+???
+
+* O último, foi a análise de uma cepa de solo de cerrado que, através dos resultados dos pipelines e principalmente das anotações funcionais fizemos uma vasta caracterização genômica e fisiológica para compará-la com espécies próximas e propor uma nova espécie e a existência de um cromídeo.
 
 ---
 
@@ -403,20 +397,28 @@ knitr::include_graphics(c("https://www.frontiersin.org/files/Articles/604031/fmi
     + Pangenoma, filogenia, comparação de conteúdo funcional, resistência, STs, etc.
 
 .pull-left[
-<img src="IMAGES/ko_comparison_snapshot.png" width="400">
-<img src="IMAGES/gingr_snapshot.png" width="400">
+<center>
+<img src="IMAGES/ko_comparison_snapshot.png" width="450">
+<img src="IMAGES/gingr_snapshot.png" width="450">
+</center>
 ]
 
 .pull-right[
 <br>
 <br>
 <img src="IMAGES/pan_genome.svg">
-<center>
 ```{r, echo=FALSE, out.width="30%"}
 knitr::include_graphics(c("IMAGES/pangenome_frequency.svg", "IMAGES/pangenome_pie.svg", "IMAGES/pangenome_matrix.svg"))
 ```
-</center>
 ]
+
+???
+
+* Como perspectivas principais para a segunda parte do doutorado nós temos:
+
+  + Realizar a análise de 32 cepas isoladas no HuB que possuem contextos interessantes de fenótipos de resistência e virulência não usuais. Estas já foram mandadas para sequenciamento.
+  + Utilizar o pipeline de montagem como base para preparação de dados de Renseq de algumas plantas em colaboração com a EMBRAPA.
+  + E produzir um programa de análise comparativa que seja capaz de interpretar os resultados obtidos pelo pipeline de anotação e, com eles, realizar diversas análises comparativas como: pangenoma, filogenia, resistoma, etc.
 
 ---
 class: inverse, middle, center
