@@ -18,8 +18,20 @@
   position: absolute;
   top: 1em;
   left: 1em;
-  width: 200px;
-  height: 210px;
+  width: 150px;
+  height: 160px;
+  z-index: 0;
+}
+
+.logo4 {
+  background-image: url(IMAGES/X-meeting20212.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 4em;
+  left: 1em;
+  width: 150px;
+  height: 160px;
   z-index: 0;
 }
 
@@ -35,12 +47,12 @@
   z-index: 0;
 }
 
-.logo4 {
-  background-image: url(IMAGES/X-meeting20212.png);
+.logo5{
+  background-image: url(IMAGES/fap.png);
   background-size: contain;
   background-repeat: no-repeat;
   position: absolute;
-  bottom: -6em;
+  bottom: -3em;
   right: 1em;
   width: 200px;
   height: 210px;
@@ -73,5 +85,6 @@ document
     el.innerHTML += '<div class="logo2"></div>';
     el.innerHTML += '<div class="logo3"></div>';
     el.innerHTML += '<div class="logo4"></div>';
+    el.innerHTML += '<div class="logo5"></div>';
   });
 </script>

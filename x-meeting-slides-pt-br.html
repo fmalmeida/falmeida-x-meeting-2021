@@ -252,7 +252,7 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 * Possui diversas etapas de anotações genéricas e especializadas como anotação de elementos genéticos móveis, metabótitos secundários, anotação funcional com ortologias KEGG, anotação de virulência e resistência, e muito mais.
 * Esta abrangência torna o pipeline extremamente versátil e útil para a grande maioria de amostras bacterianas, clínicas ou ambientais, diferente da maioria dos pipelines existentes que são extremamente focados em aspectos de relevância clínica.
 * Além disso, ele é implementado em módulos, o que permite a rápida adição de novas análises a depender da necessidade da comunidade.
-* Tudo isso enquanto providenciando ótimas alternativas para a visualização, interpretação e interrogação dos resultados. Como por exemplo:
+* Tudo isso enquanto providenciando ótimas alternativas para a visualização, interpretação e interrogação dos resultados, o que facilita muito a vida de pessoas pouco familiarizadas com os tipos de dados. Como por exemplo:
 
 ---
 
@@ -316,6 +316,8 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 &lt;img src="https://www.frontiersin.org/files/Articles/604031/fmicb-12-604031-HTML-r1/image_m/fmicb-12-604031-g002.jpg" width="45%" /&gt;&lt;img src="https://www.frontiersin.org/files/Articles/604031/fmicb-12-604031-HTML-r1/image_m/fmicb-12-604031-g003.jpg" width="45%" /&gt;
 &lt;/center&gt;
 
+???
+
 * Para demonstrar a versatilidade do pipeline, eu trouxe alguns exemplos de trabalhos que foram realizados utilizando os resultados dos pipelines.
 
 * O primeiro, foi a análise de 5 cepas de _K. variicola_ relevantes clinicamente a qual, com os resultados do pipeline, exploramos a conservação e relevância de genes de virulência considerados relevantes para a espécie atualmente.
@@ -350,7 +352,7 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 ???
 
-* O último, foi a análise de uma cepa de solo de cerrado que, através dos resultados dos pipelines e principalmente das anotações funcionais fizemos uma vasta caracterização genômica e fisiológica para compará-la com espécies próximas e propor uma nova espécie e a existência de um cromídeo.
+* O último, foi a análise de uma cepa de solo de cerrado que, através dos resultados dos pipelines e principalmente das anotações funcionais fizemos uma vasta caracterização genômica e fisiológica para compará-la com espécies próximas e propor uma nova espécie e a existência de um cromídeo nesta cepa.
 
 ---
 
@@ -379,8 +381,8 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 * Como perspectivas principais para a segunda parte do doutorado nós temos:
 
-  + Realizar a análise de 32 cepas isoladas no HuB que possuem contextos interessantes de fenótipos de resistência e virulência não usuais. Estas já foram mandadas para sequenciamento.
-  + Utilizar o pipeline de montagem como base para preparação de dados de Renseq de algumas plantas em colaboração com a EMBRAPA.
+  + Realizar a análise de 32 cepas isoladas no HuB que possuem contextos interessantes de fenótipos de resistência e virulência não usuais. Estas já fora mandadas para sequenciamento.
+  + E, além disso, estamos também organizando para análise outras coleções bacterians em colaboração firmada com a UNAERP e o laboratório exame.
   + E produzir um programa de análise comparativa que seja capaz de interpretar os resultados obtidos pelo pipeline de anotação e, com eles, realizar diversas análises comparativas como: pangenoma, filogenia, resistoma, etc.
 
 ---
@@ -499,8 +501,20 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   position: absolute;
   top: 1em;
   left: 1em;
-  width: 200px;
-  height: 210px;
+  width: 150px;
+  height: 160px;
+  z-index: 0;
+}
+
+.logo4 {
+  background-image: url(IMAGES/X-meeting20212.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 4em;
+  left: 1em;
+  width: 150px;
+  height: 160px;
   z-index: 0;
 }
 
@@ -516,12 +530,12 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   z-index: 0;
 }
 
-.logo4 {
-  background-image: url(IMAGES/X-meeting20212.png);
+.logo5{
+  background-image: url(IMAGES/fap.png);
   background-size: contain;
   background-repeat: no-repeat;
   position: absolute;
-  bottom: -6em;
+  bottom: -3em;
   right: 1em;
   width: 200px;
   height: 210px;
@@ -554,6 +568,7 @@ document
     el.innerHTML += '<div class="logo2"></div>';
     el.innerHTML += '<div class="logo3"></div>';
     el.innerHTML += '<div class="logo4"></div>';
+    el.innerHTML += '<div class="logo5"></div>';
   });
 </script>
 
