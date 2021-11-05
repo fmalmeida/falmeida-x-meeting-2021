@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="author" content="Felipe M. Almeida" />
     <meta name="author" content="University of Brasilia, Department of Cell Biology" />
-    <meta name="date" content="2021-10-29" />
+    <meta name="date" content="2021-11-05" />
     <script src="x-meeting-slides_files/header-attrs/header-attrs.js"></script>
     <script src="x-meeting-slides_files/fabric/fabric.min.js"></script>
     <link href="x-meeting-slides_files/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
@@ -42,7 +42,7 @@ class: center, middle, inverse, title-slide
 ## Scalable and versatile container-based pipelines for comprehensive bacterial genomics analyses
 ### Felipe M. Almeida
 ### University of Brasilia, Department of Cell Biology
-### 2021-10-29
+### 2021-11-05
 
 ---
 
@@ -433,8 +433,20 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   position: absolute;
   top: 1em;
   left: 1em;
-  width: 200px;
-  height: 210px;
+  width: 150px;
+  height: 160px;
+  z-index: 0;
+}
+
+.logo4 {
+  background-image: url(IMAGES/X-meeting20212.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 4em;
+  left: 1em;
+  width: 150px;
+  height: 160px;
   z-index: 0;
 }
 
@@ -445,6 +457,18 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   position: absolute;
   bottom: -5em;
   left: 1em;
+  width: 200px;
+  height: 210px;
+  z-index: 0;
+}
+
+.logo5{
+  background-image: url(IMAGES/fap.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: -3em;
+  right: 1em;
   width: 200px;
   height: 210px;
   z-index: 0;
@@ -475,6 +499,8 @@ document
   .forEach(el => {
     el.innerHTML += '<div class="logo2"></div>';
     el.innerHTML += '<div class="logo3"></div>';
+    el.innerHTML += '<div class="logo4"></div>';
+    el.innerHTML += '<div class="logo5"></div>';
   });
 </script>
 
