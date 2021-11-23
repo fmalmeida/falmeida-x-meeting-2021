@@ -35,7 +35,7 @@ library(icons)
 # source: https://github.com/gadenbuie/xaringanExtra
 #xaringanExtra::use_animate_css()
 #xaringanExtra::use_animate_all("slide_down")
-#xaringanExtra::use_scribble()
+xaringanExtra::use_scribble()
 xaringanExtra::use_search(show_icon = TRUE)
 xaringanExtra::use_tachyons()
 xaringanExtra::use_webcam()
@@ -109,7 +109,7 @@ Aplicação se tornando cada vez mais concreta durante a atual pandemia do Sars-
 ]
 <br>
 <br>
-<img src="https://media.springernature.com/lw685/springer-static/image/art%3A10.1186%2Fs40246-021-00326-3/MediaObjects/40246_2021_326_Fig1_HTML.png">
+<img src="IMAGES/40246_2021_326_Fig1_HTML.png">
 ]
 
 ???
@@ -304,7 +304,7 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 # Bacannot: Navegador genômico
 
 <center>
-<img src="https://bacannot.readthedocs.io/en/latest/_images/jbrowse.png" width="90%">
+<img src="IMAGES/jbrowse.png" width="90%">
 </center>
 
 ???
@@ -347,7 +347,7 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 
 <center>
 ```{r, echo=FALSE, out.width="45%"}
-knitr::include_graphics(c("https://www.frontiersin.org/files/Articles/604031/fmicb-12-604031-HTML-r1/image_m/fmicb-12-604031-g002.jpg","https://www.frontiersin.org/files/Articles/604031/fmicb-12-604031-HTML-r1/image_m/fmicb-12-604031-g003.jpg"))
+knitr::include_graphics(c("IMAGES/fmicb-12-604031-g002.jpg","IMAGES/fmicb-12-604031-g003.jpg"))
 ```
 </center>
 
