@@ -309,7 +309,7 @@ nextflow run fmalmeida/ngs-preprocess -c config.txt
 * All annotation available in the browser
 
 <center>
-<img src="https://bacannot.readthedocs.io/en/latest/_images/jbrowse.png" width="90%">
+<img src="IMAGES/jbrowse.png" width="90%">
 </center>
 
 ???
