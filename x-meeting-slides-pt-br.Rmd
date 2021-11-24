@@ -5,7 +5,7 @@ author:
   - "Felipe M. Almeida"
   - "Departamento de Biologia Celular, Universidade de Brasília"
 # date: '`r Sys.Date()`'
-date: 'November 2021'
+date: 'Novembro 2021'
 output:
   xaringan::moon_reader:
     includes:
