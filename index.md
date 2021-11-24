@@ -1,8 +1,10 @@
-# X-meeting presentation
+# X-meeting XPress 2021
 
 October - 2021
 
 * [x-meeting-slides](./x-meeting-slides.html)
+
+# X Simpósio da Biomol 2021
 
 November - 2021
 
